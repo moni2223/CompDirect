@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% block body %}
+        {% block nav %}
+
+            <nav class="navbar sticky-top py-2 navbar-expand-lg navbar-light bg-light" id="navbar">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active mx-3">
+                            <a class="nav-link" href="{{ path('homepage') }}"> <strong>Начало</strong> <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="{{ path('about_us') }}"><strong>За нас</strong></a>
+                        </li>
+
+                        <li class="nav-item  mx-3">
+                            <a class="nav-link" href="{{ path('compareprices') }}"><strong>Сравняване на цени</strong></a>
+                        </li>
+
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="{{ path('first_step') }}"><strong>Компютърни конфигурации</strong></a>
+                        </li>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <p>Добре дошъл,{{ app.user.first }}</p>
+                            <a class="nav-link" href="{{ path('app_logout') }}"><strong>Излез</strong></a>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

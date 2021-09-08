@@ -1,0 +1,226 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ asset('build/static/logo.png') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap-theme.min.css">
+
+    <style>
+        body
+        {
+            background-color:#eaeaea;
+        }
+        .nav-text {
+
+            color: #2394D5;
+        }
+
+        .nav-text:hover {
+            color: gray;
+            text-decoration: none;
+        }
+
+        .navtext {
+
+            size: 5;
+        }
+
+        #navbar {
+
+            border-bottom: 0.1px solid gray;
+        }
+        .bodyimg {
+            background-image: url("{{ asset('build/static/body.jpg') }}");
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .logo1 {
+            height:18%;
+        }
+
+        .inner {
+            background-color: #eaeaea;
+            border-radius: 5%;
+        }
+
+        #footer {
+            border-top: solid 0.5px black;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-collapse justify-content-md-center collapse show" style="">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('homepage') }}"><img class="img-fluid d-block px-auto mx-auto" style= "width: 45%;" src="{{ asset('build/static/logo-finished.png') }}"></a>
+            </li>
+        </ul>
+        <div class="btn-group-vertical btn-group-sm d-block " role="group">
+            <button type="button" id="logbutton" class="btn btn-secondary disabled">Вход</button>
+            <button type="button" id="regbutton" class="btn btn-secondary">Регистрация</button>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar sticky-top py-2 navbar-expand-md navbar-light bg-light" id="navbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample08">
+
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item w-25 slideanim" >
+                <img class="" style= "width: 22%;" src="{{ asset('build/static/logo.png') }}">
+            </li>
+
+            <li class="nav-item mx-3 my-auto ">
+                <a class="nav-link" href="{{ path('homepage') }}"> <strong>Начало</strong> <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active mx-3 my-auto">
+                <a class="nav-link" href="{{ path('about_us') }}"><strong>За нас</strong></a>
+            </li>
+
+            <li class="nav-item mx-3 my-auto">
+                <a class="nav-link" href="{{ path('compareprices') }}"><strong>Сравняване на цени</strong></a>
+            </li>
+
+            <li class="nav-item mx-3 my-auto">
+                <a class="nav-link" href="{{ path('first_step') }}"><strong>Компютърни конфигурации</strong></a>
+            </li>
+        </ul>
+
+
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED" ) %}
+            <div class="nav-item mx-auto px-auto my-auto">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Добре дошли,{{ app.user.first }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('changepassword') }}">Редактиране на профил</a>
+                        <a class="dropdown-item" href="{{ path('myconfig') }}">Запазени конфигурации</a>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}">Изход</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED" ) %}
+            <div class="nav-item mx-auto mr-3 px-auto my-auto">
+                <div class="btn-group-vertical  btn-group-sm mx-auto" role="group">
+                    <a  id="logbutton" class="btn btn-primary text-white" href="{{ path('app_login') }}">Вход</a>
+                    <a id="regbutton" class="btn btn-primary text-white"href="{{ path('site_register') }}">Регистрация</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+
+
+<div class="container-fluid px-0">
+
+
+    <div class="bodyimg p-5">
+
+        <div class="container-fluid mt-5 p-5 inner">
+            <div class="row">
+                <div class="col-12 pt-2 text-center my-1">
+                    <h1 class="display-4 font-weight-normal"> Регистрация </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-lg-6 col-md-offset-3 mx-auto px-auto">
+                    <div class="panel panel-primary">
+                    </div>
+                    <div class="panel-body">
+                        <form name="myform">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Електронна поща:</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  data-validation="required">
+                                <span id="error_email1" class="text-danger"></span>
+                                <span id="error_email2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Парола:</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" data-validation="required">
+                                <span id="error_password1" class="text-danger"></span>
+                                <span id="error_password2" class="text-danger"></span>
+                            </div>
+
+                            <button id="submit" type="submit" value="submit" class="btn btn-primary center">Влез</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="container py-5 mt-3 " id="footer">
+    <div class="row ">
+        <div class="col-12 col-md ">
+            <img class="w-25" src="{{ asset('build/static/logo.png') }}">
+            <small class="d-block mb-3 text-muted ">© 2019</small>
+        </div>
+        <div class="col-6 col-md ">
+            <h5>Секции</h5>
+            <ul class="list-unstyled text-small ">
+                <li><a class="text-muted " href="{{ path('homepage') }}">Начало</a></li>
+                <li><a class="text-muted " href="{{ path('about_us') }}">За нас</a></li>
+                <li><a class="text-muted " href="{{ path('compareprices') }}">Сравняване на цени</a></li>
+                <li><a class="text-muted " href="{{ path('first_step') }}">Компютърни конфигурации</a></li>
+            </ul>
+        </div>
+
+        <div class="col-6 col-md ">
+            <h5>За връзка:</h5>
+            <ul class="list-unstyled text-small">
+                <li class="text-muted">dragomirvasilev23@gmail.com</li>
+                <li class="text-muted">ben669@abv.bg</li>
+            </ul>
+        </div>
+        <div class="col-6 mt-5 col-md">
+
+            <a href="#" id="scroll"><img class="logo1" src="{{ asset('build/static/arrowup.png') }}"></a>
+
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#scroll').click(function () {
+            $("html, body").animate({scrollTop: 0}, 600);
+            return false;
+        });
+    });
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+<script>
+    $(document).ready(function() {
+        $("#regbutton").attr('href','')
+        $("#logbutton").attr('href','#')
+    });
+</script>
+<script>
+
+</script>
+</body>
+
+</html>
