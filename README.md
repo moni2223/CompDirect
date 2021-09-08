@@ -8,3 +8,6 @@ Still in Beta version
 ## Refs  
  - [Symfony](https://symfony.com/doc/current/index.html)
  - [Twig](https://twig.symfony.com/doc/3.x/) 
+
+## More info and documentation:
+- [Doc](https://drive.google.com/file/d/1sFD6UoYog_PENoh805MtgQ7ybjj92lGI/view?usp=sharing)
